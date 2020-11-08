@@ -425,6 +425,19 @@ def getRectAsImage(rect):
 	return _getRectAsImage(rect)
 
 
+def getWindowAsImage(hwnd = None):
+	"""
+	Returns a PIL Image object (mode RGB) of a Window.
+
+	Raises L{GrabFailed} if unable to take a screenshot (e.g. due to locked
+	workstation, no display, or active UAC elevation screen).
+	"""
+	if hwnd == None:
+		hwnd = win32gui.GetForegroundWindow()
+	rect = win32gui.GetWindowRect(hwnd)
+	return _getRectAsImage(rect)
+
+
 def saveScreenToBmp(bmpFilename):
 	"""
 	Save a screenshot of the entire virtual screen to a .bmp file.  Does not
